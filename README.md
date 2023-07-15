@@ -1,2 +1,83 @@
-# create-jira-issues
-GitHub Action to create Jira issues
+# Create Jira issues
+This GitHub Action creates Jira issues specified via an input file (JSON).
+
+## Usage
+```yaml
+    - uses: rmeneely/create-jira-issues@v1
+      with:
+        input: <filename>
+        url: <base url>
+        token: Base64 encoded token <email:API Key>
+```
+
+### Inputs
+
+| Name  | Description                               | Default     | Required |
+| ------|:----------------------------------------- | :-----------|:---------|
+| input | File specifying issues to create (JSON)   | issues.json | False    |
+| url   | Base URL e.g. http://myjira.atlassian.com | none        | True     |
+| token | Base64 encoded API token <email:API key>  | none        | True     |
+
+
+## Examples
+```yaml
+    # Creates Jira issues specified via an input file (JSON)
+    - uses: rmeneely/create-jira-issues@v1
+      with:
+        input: jira_issues.json
+        url: http://myjira.atlassian.com
+        token: asdasdasdasdfafsldjfhnsdfkjsdbfskfbjskfbksjlsjfkjsbndvkjsbksbfksjbfknjnbfklj
+```
+
+### Example input file - creating Sub-tasks for existing issue
+```json
+{
+  "issue": [
+    {
+      "fields": {
+        "project": {
+          "key": "RT"
+        },
+        "parent": {
+          "key": "RT-9"
+        },
+        "summary": "QA feature 38",
+        "description": "Complete QA testing for feature 38",
+        "issuetype": {
+          "name": "Sub-task"
+        },
+        "assignee": {
+          "id": "624c8e42ad6b4e006aa89b65"
+        }
+      }
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "RT"
+        },
+        "parent": {
+          "key": "RT-9"
+        },
+        "summary": "QA feature 39",
+        "description": "Complete QA testing for feature 39",
+        "issuetype": {
+          "name": "Sub-task"
+        },
+        "assignee": {
+          "id": "624c8e42ad6b4e006aa89b65""
+        }
+      }
+    }
+  ]
+}
+```
+
+
+## Output
+```shell
+steps.create-jira-issues.outputs.issues - Set to comma separated list of created issue keys
+```
+
+## License
+The MIT License (MIT)
