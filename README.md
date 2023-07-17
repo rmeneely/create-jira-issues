@@ -7,16 +7,18 @@ This GitHub Action creates Jira issues specified via an input file (JSON).
       with:
         input: <filename>
         url: <base url>
-        token: Base64 encoded token <email:API Key>
+        user_email: Jira user email
+        api_token: Jira user API token
 ```
 
 ### Inputs
 
-| Name  | Description                               | Default     | Required |
-| ------|:----------------------------------------- | :-----------|:---------|
-| input | File specifying issues to create (JSON)   | issues.json | False    |
-| url   | Base URL e.g. http://myjira.atlassian.com | none        | True     |
-| token | Base64 encoded API token <email:API key>  | none        | True     |
+| Name       | Description                               | Default     | Required |
+| ---------- |:----------------------------------------- | :-----------|:---------|
+| input      | File specifying issues to create (JSON)   | issues.json | False    |
+| url        | Base URL e.g. http://myjira.atlassian.com | none        | True     |
+| user_email | Jira email for authentication        | none        | True     |
+| api_token  | Jira API token for authentication    | none        | True     |
 
 
 ## Examples
@@ -26,7 +28,8 @@ This GitHub Action creates Jira issues specified via an input file (JSON).
       with:
         input: jira_issues.json
         url: http://myjira.atlassian.com
-        token: asdasdasdasdfafsldjfhnsdfkjsdbfskfbjskfbksjlsjfkjsbndvkjsbksbfksjbfknjnbfklj
+        user_email: me@mydomain.com
+        api_token: asdasdasdasdfafsldjfhnsdfkjsdbfskfbjskfbksjlsjfkjsbndvkjsbksbfksjbfknjnbfklj
 ```
 
 ### Example input file - creating Sub-tasks for existing issue
@@ -65,13 +68,14 @@ This GitHub Action creates Jira issues specified via an input file (JSON).
           "name": "Sub-task"
         },
         "assignee": {
-          "id": "624c8e42ad6b4e006aa89b65""
+          "id": "624c8e42ad6b4e006aa89b65"
         }
       }
     }
   ]
 }
 ```
+See [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/#api-rest-api-3-issue-post) for details on JSON file options
 
 
 ## Output

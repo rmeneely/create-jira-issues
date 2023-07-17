@@ -13,8 +13,12 @@ inputs:
     description: The base URL (e.g. http://myjira.atlassian)
     default: ''
     required: true
-  token:
-    description: The base64 encoded token (format: email:api_token)
+  user_email:
+    description: The Jira user email
+    default: ''
+    required: true
+  api_token:
+    description: The Jira API token
     default: ''
     required: true
 outputs:
@@ -35,5 +39,6 @@ runs:
         python ${{ github.action_path }}/create-jira-issues.py \
           --input "${{ inputs.input }}" \
           --url "${{ inputs.url }}" \
-          --token "${{ inputs.token }}" \
+          --user_email "${{ inputs.user_email }}" \
+          --api_token "${{ inputs.token }}"
       shell: bash
