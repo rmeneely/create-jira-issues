@@ -40,5 +40,5 @@ runs:
           --input "${{ inputs.input }}" \
           --url "${{ inputs.url }}" \
           --user_email "${{ inputs.user_email }}" \
-          --api_token "${{ inputs.token }}"
+          --api_token "${{ inputs.api_token }}"
       shell: bash
